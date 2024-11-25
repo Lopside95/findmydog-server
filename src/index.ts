@@ -7,7 +7,7 @@ const app: Express = express();
 
 app.use(express.json());
 
-app.use("/posts", posts);
+app.use("/", posts);
 app.use("/users", users);
 
 const port = process.env.PORT || 8000;

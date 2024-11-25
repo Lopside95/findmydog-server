@@ -7,12 +7,17 @@ export type Post = {
   description: string;
   urgency: number;
   type: PostType;
-  status: string;
+  status: PostStatus;
   created_at: Date;
   updated_at: Date;
 };
 
 export enum PostType {
-  General = "GENERAL",
-  Report = "REPORT",
+  "GENERAL",
+  "REPORT",
+}
+
+export enum PostStatus {
+  "OPEN",
+  "CLOSED",
 }
