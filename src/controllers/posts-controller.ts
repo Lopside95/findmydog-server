@@ -19,6 +19,10 @@ const getAllPosts = async (req: Request, res: Response): Promise<void> => {
 const createPost = async (req: Request, res: Response): Promise<void> => {
   try {
     const data = req.body;
+
+    console.log(req.body);
+    // res.status(500).send(req.body);
+
     const dummyData = {
       title: "Found lost wallet",
       longitude: -122.4194,
@@ -53,11 +57,10 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
       img: data.img,
       description: data.description,
       urgency: data.urgency,
-      tags: data.tags,
       type: data.PostType,
       status: data.PostStatus,
-      created_at: new Date(),
-      updated_at: new Date(),
+      // created_at: new Date(),
+      // updated_at: new Date(),
     });
 
     res.status(201).json({ newPost });

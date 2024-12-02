@@ -1,8 +1,10 @@
 import z from "zod";
 
-export const tag = z.object({
-  name: z.string(),
-});
+export const tag = z.string();
+
+// export const tag = z.object({
+//   name: z.string(),
+// });
 
 export const postSchema = z.object({
   title: z.string(),
