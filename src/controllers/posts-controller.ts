@@ -1,14 +1,14 @@
 import { Router, Request, Response } from "express";
 import initKnex from "knex";
 import knexConfig from "../../knexfile.ts";
-import { Post } from "../utils/types.ts";
 import { title } from "process";
+import { PostSchema } from "../utils/types.ts";
 
 const knex = initKnex(knexConfig);
 
 const getAllPosts = async (req: Request, res: Response): Promise<void> => {
   try {
-    const posts: Post[] = await knex("posts");
+    const posts: PostSchema[] = await knex("posts");
 
     res.status(200).json(posts);
   } catch (error) {
@@ -19,8 +19,34 @@ const getAllPosts = async (req: Request, res: Response): Promise<void> => {
 const createPost = async (req: Request, res: Response): Promise<void> => {
   try {
     const data = req.body;
+    const dummyData = {
+      title: "Found lost wallet",
+      longitude: -122.4194,
+      latitude: 37.7749,
+      img: "https://example.com/images/lost-wallet.jpg",
+      description:
+        "A wallet was found near the park. It contains cards and some cash.",
+      urgency: "High",
+      tags: ["wallet", "lost", "urgent"],
+      PostType: "Found",
+      PostStatus: "Open",
+    };
 
-    const newPost: Post = await knex("posts").insert({
+    // const newPost = await knex("posts").insert({
+    //   title: dummyData.title,
+    //   longitude: dummyData.longitude,
+    //   latitude: dummyData.latitude,
+    //   img: dummyData.img,
+    //   description: dummyData.description,
+    //   urgency: dummyData.urgency,
+    //   tags: dummyData.tags,
+    //   type: dummyData.PostType,
+    //   status: dummyData.PostStatus,
+    //   created_at: new Date(),
+    //   updated_at: new Date(),
+    // });
+
+    const newPost: PostSchema = await knex("posts").insert({
       title: data.title,
       longitude: data.longitude,
       latitude: data.latitude,

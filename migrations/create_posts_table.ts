@@ -10,6 +10,7 @@ export async function up(knex: Knex) {
     table.string("longitude");
     table.string("latitude");
     table.integer("urgency").notNullable();
+    table.increments("tag_id", { primaryKey: false });
     table.enu("type", ["GENERAL", "REPORT"]).notNullable();
     table.enu("status", ["OPEN", "CLOSED"]).notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());

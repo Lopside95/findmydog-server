@@ -4,7 +4,7 @@ export async function up(knex: Knex) {
   await knex.schema.createTable("tags", function (table) {
     table.increments("id").primary();
     table.string("name").notNullable();
-    // table.boolean("active");
+    table.increments("post_id", { primaryKey: false });
   });
 }
 
