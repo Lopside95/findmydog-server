@@ -11,7 +11,7 @@ export async function seed(knex: Knex) {
       password: "password123",
       active: true,
       created_at: knex.fn.now(),
-      updated_at: knex.raw("CURRENT_TIMESTAMP"),
+      updated_at: knex.fn.now(),
     },
     {
       first_name: "Jane",
@@ -20,7 +20,7 @@ export async function seed(knex: Knex) {
       password: "securepassword",
       active: false,
       created_at: knex.fn.now(),
-      updated_at: knex.raw("CURRENT_TIMESTAMP"),
+      updated_at: knex.fn.now(),
     },
     {
       first_name: "Alice",
@@ -29,7 +29,7 @@ export async function seed(knex: Knex) {
       password: "alice123",
       active: true,
       created_at: knex.fn.now(),
-      updated_at: knex.raw("CURRENT_TIMESTAMP"),
+      updated_at: knex.fn.now(),
     },
     {
       first_name: "Bob",
@@ -38,7 +38,7 @@ export async function seed(knex: Knex) {
       password: "bobpassword",
       active: true,
       created_at: knex.fn.now(),
-      updated_at: knex.raw("CURRENT_TIMESTAMP"),
+      updated_at: knex.fn.now(),
     },
     {
       first_name: "Charlie",
@@ -47,7 +47,7 @@ export async function seed(knex: Knex) {
       password: "charlie2024",
       active: false,
       created_at: knex.fn.now(),
-      updated_at: knex.raw("CURRENT_TIMESTAMP"),
+      updated_at: knex.fn.now(),
     },
   ]);
 }

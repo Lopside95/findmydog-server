@@ -5,7 +5,7 @@ import { UserSchema } from "../utils/types.ts";
 
 const knex = initKnex(knexConfig);
 
-const getAllTags = async (req: Request, res: Response): Promise<void> => {
+const getAllUsers = async (req: Request, res: Response): Promise<void> => {
   try {
     const users: UserSchema = await knex("users");
 
@@ -15,4 +15,4 @@ const getAllTags = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export { getAllTags };
+export { getAllUsers };
