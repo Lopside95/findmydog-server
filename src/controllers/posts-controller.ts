@@ -8,9 +8,9 @@ const knex = initKnex(knexConfig);
 
 const getAllPosts = async (req: Request, res: Response): Promise<void> => {
   try {
-    const posts = await knex("posts");
+    const posts: Post[] = await knex("posts");
 
-    res.json(posts);
+    res.status(200).json(posts);
   } catch (error) {
     console.error(error);
   }
@@ -27,6 +27,7 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
       img: data.img,
       description: data.description,
       urgency: data.urgency,
+      tags: data.tags,
       type: data.PostType,
       status: data.PostStatus,
       created_at: new Date(),
