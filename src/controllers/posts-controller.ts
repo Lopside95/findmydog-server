@@ -2,15 +2,34 @@ import { Router, Request, Response } from "express";
 import initKnex from "knex";
 import knexConfig from "../../knexfile.ts";
 import { title } from "process";
-import { PostSchema, TagSchema } from "../utils/types.ts";
+import { PostSchema, TagSchema } from "../utils/schemas.ts";
+import { Post } from "../utils/types.ts";
 
 const knex = initKnex(knexConfig);
 
 const getAllPosts = async (req: Request, res: Response): Promise<void> => {
   try {
-    const posts: PostSchema[] = await knex("posts");
+    const posts: Post[] = await knex("posts");
 
     res.status(200).json(posts);
+  } catch (error) {
+    console.error(error);
+  }
+};
+const getPostsWithTags = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const postsWithTags: Post[] = await knex("posts")
+      .leftJoin("posts_tags", "posts.id", "posts_tags.post_id")
+      .leftJoin("tags", "tags.id", "posts_tags.tag_id")
+      .select(
+        "posts.*",
+        knex.raw(
+          "JSON_ARRAYAGG(JSON_OBJECT('id', tags.id, 'name', tags.name)) as tags"
+        )
+      )
+      .groupBy("posts.id");
+
+    res.status(200).json(postsWithTags);
   } catch (error) {
     console.error(error);
   }
@@ -21,7 +40,6 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
     const data = req.body;
 
     console.log(req.body);
-    // res.status(500).send(req.body);
 
     const tags = req.body.tags;
 
@@ -34,8 +52,6 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
       urgency: data.urgency,
       type: data.PostType,
       status: data.PostStatus,
-      // created_at: new Date(),
-      // updated_at: new Date(),
     });
 
     console.log(newPostIds);
@@ -46,8 +62,6 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
         tag_id: tag.id,
       });
     });
-
-    // const postAndTags = await knex("posts_tags").insert({post_id: })
 
     const newPost = await knex("posts").where({ id: newPostIds[0] }).first();
 
@@ -61,18 +75,4 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export { getAllPosts, createPost };
-
-// const newPost = await knex("posts").insert({
-//   title: dummyData.title,
-//   longitude: dummyData.longitude,
-//   latitude: dummyData.latitude,
-//   img: dummyData.img,
-//   description: dummyData.description,
-//   urgency: dummyData.urgency,
-//   tags: dummyData.tags,
-//   type: dummyData.PostType,
-//   status: dummyData.PostStatus,
-//   created_at: new Date(),
-//   updated_at: new Date(),
-// });
+export { getAllPosts, createPost, getPostsWithTags };

@@ -16,8 +16,6 @@ export async function up(knex: Knex) {
       .inTable("tags")
       .onDelete("CASCADE");
     table.primary(["post_id", "tag_id"]);
-    // table.integer("post_id").unsigned().references("posts.id");
-    // table.integer("tag_id").unsigned().references("tags.id");
   });
 }
 

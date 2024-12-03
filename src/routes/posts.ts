@@ -1,9 +1,13 @@
 import { Router, Request, Response } from "express";
-import { createPost, getAllPosts } from "../controllers/posts-controller.ts";
+import {
+  createPost,
+  getAllPosts,
+  getPostsWithTags,
+} from "../controllers/posts-controller.ts";
 
 const router: Router = Router();
 
-router.get("/", getAllPosts);
+router.get("/", getPostsWithTags);
 
 router.post("/", createPost);
 

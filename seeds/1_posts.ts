@@ -6,7 +6,7 @@ export async function seed(knex: Knex) {
   await knex("posts").insert([
     {
       title: "Lost Dog in Central Park",
-      img: "https://example.com/lost-dog.jpg",
+      img: "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
       description:
         "Small brown dog spotted near the fountain, wearing a red collar.",
       longitude: "-73.9654",
@@ -17,7 +17,7 @@ export async function seed(knex: Knex) {
     },
     {
       title: "Community Clean-Up Event",
-      img: "https://example.com/cleanup-event.jpg",
+      img: "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
       description:
         "Join us this Saturday to clean up the riverbanks. Supplies provided.",
       longitude: "-122.4194",
@@ -28,7 +28,7 @@ export async function seed(knex: Knex) {
     },
     {
       title: "Streetlight Outage Report",
-      img: null,
+      img: "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
       description:
         "Streetlight out on 5th Avenue and Main Street. Potential safety hazard.",
       longitude: "-80.8431",
@@ -39,7 +39,7 @@ export async function seed(knex: Knex) {
     },
     {
       title: "Missing Cat in Suburbia",
-      img: "https://example.com/missing-cat.jpg",
+      img: "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
       description:
         "Grey tabby missing since last night, last seen near Oak Street.",
       longitude: "-118.2437",
@@ -50,7 +50,7 @@ export async function seed(knex: Knex) {
     },
     {
       title: "Food Drive Collection Update",
-      img: "https://example.com/food-drive.jpg",
+      img: "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
       description:
         "Our local food drive collected over 500 cans! Thanks to everyone who contributed.",
       longitude: "-71.0589",
