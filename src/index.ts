@@ -3,6 +3,7 @@ import "dotenv/config";
 import posts from "./routes/posts.ts";
 import users from "./routes/users.ts";
 import tags from "./routes/tags.ts";
+import home from "./routes/home.ts";
 import cors from "cors";
 
 const app: Express = express();
@@ -11,7 +12,9 @@ app.use(express.json());
 
 app.use(cors());
 
-app.use("/", posts);
+app.use("/", home);
+
+app.use("/posts", posts);
 app.use("/users", users);
 app.use("/tags", tags);
 

@@ -10,7 +10,6 @@ const knex = initKnex(knexConfig);
 const getAllPosts = async (req: Request, res: Response): Promise<void> => {
   try {
     const posts: Post[] = await knex("posts");
-
     res.status(200).json(posts);
   } catch (error) {
     console.error(error);
@@ -39,9 +38,7 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
   try {
     const data = req.body;
 
-    console.log(req.body);
-
-    const tags = req.body.tags;
+    const tags = data.tags;
 
     const newPostIds: PostSchema[] = await knex("posts").insert({
       title: data.title,
@@ -53,8 +50,6 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
       type: data.PostType,
       status: data.PostStatus,
     });
-
-    console.log(newPostIds);
 
     tags.forEach(async (tag: TagSchema) => {
       await knex("posts_tags").insert({

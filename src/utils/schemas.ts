@@ -7,18 +7,6 @@ export const tag = z.object({
   name: z.string(),
 });
 
-// export const postSchema = z.object({
-//   title: z.string(),
-//   img: z.string().optional(),
-//   description: z.string(),
-//   urgency: z.number(),
-//   type: z.enum(["General", "Report"]),
-//   status: z.enum(["Open", "Closed"]),
-//   tags: z.array(tag),
-//   longitude: z.number().optional(),
-//   latitude: z.number().optional(),
-// });
-
 export const postSchema = z.object({
   title: z.string(),
   img: z.string().optional(),
@@ -29,6 +17,14 @@ export const postSchema = z.object({
   tags: z.array(tag),
   longitude: z.number().optional(),
   latitude: z.number().optional(),
+  //tags
+  // descriptive tags
+  // color
+  // breed
+  // size - s, m, l
+  //
+
+  // condition tags
 });
 
 export const userSchema = z.object({
@@ -36,8 +32,7 @@ export const userSchema = z.object({
   last_name: z.string(),
   email: z.string().email(),
   password: z.string(),
-  active: z.boolean(),
-  posts: z.array(postSchema),
+  active: z.boolean().default(true),
 });
 
 export type PostSchema = z.infer<typeof postSchema>;
