@@ -15,6 +15,17 @@ const getAllUsers = async (req: Request, res: Response): Promise<void> => {
     console.error(error);
   }
 };
+const getUserById = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id = req.params.id;
+
+    const user: User = await knex("users").where("id", req.params.id).first();
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const createUser = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -33,4 +44,4 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
     console.error(error);
   }
 };
-export { getAllUsers, createUser };
+export { getAllUsers, createUser, getUserById };

@@ -14,6 +14,7 @@ export async function seed(knex: Knex) {
       urgency: 3,
       type: "REPORT",
       status: "OPEN",
+      user_id: 1,
     },
     {
       title: "Community Clean-Up Event",
@@ -25,6 +26,7 @@ export async function seed(knex: Knex) {
       urgency: 1,
       type: "GENERAL",
       status: "OPEN",
+      user_id: 1,
     },
     {
       title: "Streetlight Outage Report",
@@ -36,6 +38,7 @@ export async function seed(knex: Knex) {
       urgency: 2,
       type: "REPORT",
       status: "OPEN",
+      user_id: 1,
     },
     {
       title: "Missing Cat in Suburbia",
@@ -47,6 +50,7 @@ export async function seed(knex: Knex) {
       urgency: 4,
       type: "REPORT",
       status: "OPEN",
+      user_id: 1,
     },
     {
       title: "Food Drive Collection Update",
@@ -58,6 +62,7 @@ export async function seed(knex: Knex) {
       urgency: 1,
       type: "GENERAL",
       status: "CLOSED",
+      user_id: 1,
     },
   ]);
 }
