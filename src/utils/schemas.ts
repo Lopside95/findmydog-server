@@ -37,8 +37,10 @@ export const userSchema = z.object({
 
 export const commentSchema = z.object({
   content: z.string(),
-  post: postSchema,
-  user: userSchema,
+  post_id: z.string(),
+  user_id: z.string().optional(),
+  // post: postSchema,
+  // user: userSchema,
 });
 
 export type CommentSchema = z.infer<typeof commentSchema>;

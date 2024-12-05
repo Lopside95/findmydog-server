@@ -19,7 +19,7 @@ const getUserById = async (req: Request, res: Response): Promise<void> => {
   try {
     const id = req.params.id;
 
-    const user: User = await knex("users").where("id", req.params.id).first();
+    const user: User = await knex("users").where("id", id).first();
 
     res.status(200).json(user);
   } catch (error) {
