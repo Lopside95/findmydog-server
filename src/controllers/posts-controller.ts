@@ -4,35 +4,40 @@ import knexConfig from "../../knexfile.ts";
 import { title } from "process";
 import { PostSchema, TagSchema } from "../utils/schemas.ts";
 import { Post } from "../utils/types.ts";
+import { getPostsAndTag } from "../utils/helpers.ts";
 
 const knex = initKnex(knexConfig);
 
 const getAllPosts = async (req: Request, res: Response): Promise<void> => {
   try {
-    const posts: Post[] = await knex("posts");
+    const posts: Post[] = await getPostsAndTag();
+
+    console.log(posts);
+
+    // const posts: Post[] = await knex("posts");
     res.status(200).json(posts);
   } catch (error) {
     console.error(error);
   }
 };
-const getPostsWithTags = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const postsWithTags: Post[] = await knex("posts")
-      .leftJoin("posts_tags", "posts.id", "posts_tags.post_id")
-      .leftJoin("tags", "tags.id", "posts_tags.tag_id")
-      .select(
-        "posts.*",
-        knex.raw(
-          "JSON_ARRAYAGG(JSON_OBJECT('id', tags.id, 'name', tags.name)) as tags"
-        )
-      )
-      .groupBy("posts.id");
+// const getPostsWithTags = async (req: Request, res: Response): Promise<void> => {
+//   try {
+//     const postsWithTags: Post[] = await knex("posts")
+//       .leftJoin("posts_tags", "posts.id", "posts_tags.post_id")
+//       .leftJoin("tags", "tags.id", "posts_tags.tag_id")
+//       .select(
+//         "posts.*",
+//         knex.raw(
+//           "JSON_ARRAYAGG(JSON_OBJECT('id', tags.id, 'name', tags.name)) as tags"
+//         )
+//       )
+//       .groupBy("posts.id");
 
-    res.status(200).json(postsWithTags);
-  } catch (error) {
-    console.error(error);
-  }
-};
+//     res.status(200).json(postsWithTags);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
 const createPost = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -70,4 +75,4 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export { getAllPosts, createPost, getPostsWithTags };
+export { getAllPosts, createPost };

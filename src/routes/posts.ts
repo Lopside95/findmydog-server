@@ -2,12 +2,12 @@ import { Router, Request, Response } from "express";
 import {
   createPost,
   getAllPosts,
-  getPostsWithTags,
+  // getPostsWithTags,
 } from "../controllers/posts-controller.ts";
 
 const router: Router = Router();
 
-router.get("/", getPostsWithTags);
+router.get("/", getAllPosts);
 
 router.post("/", createPost);
 

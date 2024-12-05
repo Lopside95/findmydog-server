@@ -9,8 +9,4 @@ export default {
     database: process.env.DB_NAME,
     charset: "utf8",
   },
-  debug: true,
-  //   migrations: {
-  //     extension: "ts",
-  //   },
 };

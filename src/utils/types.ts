@@ -34,6 +34,15 @@ export type User = {
   updated_at: Date;
 };
 
+export type Comment = {
+  id: string;
+  content: string;
+  user: User;
+  post: Post;
+  created_at: Date;
+  updated_at: Date;
+};
+
 export enum PostType {
   "GENERAL",
   "REPORT",
