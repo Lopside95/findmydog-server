@@ -4,11 +4,12 @@ import {
   getAllUsers,
   getUserById,
 } from "../controllers/users-controller";
+import authorize from "../middleware/auth";
 
 const router: Router = Router();
 
-router.post("/", createUser);
+router.post("/signup", createUser);
 router.get("/", getAllUsers);
-router.get("/:id", getUserById);
+router.get("/:id", authorize, getUserById);
 
 export default router;
