@@ -34,7 +34,6 @@ const createComment = async (req: Request, res: Response): Promise<void> => {
     const newComment: CommentSchema[] = await knex("comments").insert({
       content: payload.content,
       post_id: id,
-      // user_id would be found by which user is logged in/ the sesssion
     });
 
     res.status(201).json(newComment);

@@ -36,33 +36,12 @@ const getPostById = async (req: Request, res: Response): Promise<void> => {
   try {
     const id = req.params.id;
     const post = await getSinglePostById(id);
-    // const allPosts: Post[] = await getPostsAndTags();
-
-    // const post = allPosts.find((post) => id === post.id);
 
     res.status(200).json(post);
   } catch (error) {
     console.error(error);
   }
 };
-// const getPostsWithTags = async (req: Request, res: Response): Promise<void> => {
-//   try {
-//     const postsWithTags: Post[] = await knex("posts")
-//       .leftJoin("posts_tags", "posts.id", "posts_tags.post_id")
-//       .leftJoin("tags", "tags.id", "posts_tags.tag_id")
-//       .select(
-//         "posts.*",
-//         knex.raw(
-//           "JSON_ARRAYAGG(JSON_OBJECT('id', tags.id, 'name', tags.name)) as tags"
-//         )
-//       )
-//       .groupBy("posts.id");
-
-//     res.status(200).json(postsWithTags);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
 
 const createPost = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -89,7 +68,6 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
     });
 
     const newPost = await knex("posts").where({ id: newPostIds[0] }).first();
-
     res.status(201).json(newPost);
   } catch (error) {
     res.status(500).json({
