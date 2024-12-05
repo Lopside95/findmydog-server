@@ -6,7 +6,7 @@ import { PostSchema, TagSchema } from "../utils/schemas.ts";
 import { Post } from "../utils/types.ts";
 const knex = initKnex(knexConfig);
 
-const getPostsAndTag = async () => {
+const getPostsAndTags = async () => {
   return await knex("posts")
     .leftJoin("posts_tags", "posts.id", "posts_tags.post_id")
     .leftJoin("tags", "tags.id", "posts_tags.tag_id")
@@ -19,4 +19,18 @@ const getPostsAndTag = async () => {
     .groupBy("posts.id");
 };
 
-export { getPostsAndTag };
+const getSinglePostById = async (id: string) => {
+  return await knex("posts")
+    .leftJoin("posts_tags", "posts.id", "posts_tags.post_id")
+    .leftJoin("tags", "tags.id", "posts_tags.tag_id")
+    .select(
+      "posts.*",
+      knex.raw(
+        "JSON_ARRAYAGG(JSON_OBJECT('id', tags.id, 'name', tags.name)) as tags"
+      )
+    )
+    .groupBy("posts.id")
+    .first();
+};
+
+export { getPostsAndTags, getSinglePostById };
