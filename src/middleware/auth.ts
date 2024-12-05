@@ -13,7 +13,9 @@ const authorize = (
   res: Response,
   next: NextFunction
 ): void => {
-  const authHeader = req.headers.authorization;
+  const authHeader = req.headers.authorisation as string;
+
+  console.log("authHeader in authorize", authHeader);
 
   if (!authHeader) {
     res

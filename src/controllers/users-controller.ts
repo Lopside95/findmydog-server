@@ -4,7 +4,7 @@ import knexConfig from "../../knexfile.ts";
 import { User } from "../utils/types.ts";
 import { UserSchema } from "../utils/schemas.ts";
 import { JWTRequest } from "../middleware/auth.ts";
-import { JwtPayload } from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 const SALT_ROUNDS = 10;
@@ -20,13 +20,11 @@ const getAllUsers = async (req: Request, res: Response): Promise<void> => {
     console.error(error);
   }
 };
-const getUserById = async (req: JWTRequest, res: Response): Promise<void> => {
+const getUserById = async (req: Request, res: Response): Promise<void> => {
   try {
-    // const id = req.params.id;
-    const token = req.token as JwtPayload;
+    const id = req.params.id;
 
-    const user: User = await knex("users").where({ id: token.id }).first();
-    // const user: User = await knex("users").where("id", id).first();
+    const user: User = await knex("users").where("id", id).first();
 
     res.status(200).json(user);
   } catch (error) {
@@ -65,4 +63,63 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
     }
   });
 };
-export { getAllUsers, createUser, getUserById };
+const login = async (req: Request, res: Response): Promise<void> => {
+  try {
+    // const id = req.params.id;
+    // const token = req.token as JwtPayload;
+    const password = req.body.password;
+    const user: User = await knex("users")
+      .where({ email: req.body.email })
+      .first();
+
+    console.log("user in login", user);
+
+    bcrypt.compare(password, user.password, function (_, success) {
+      if (!success) {
+        return res
+          .status(403)
+          .json({ message: "Email and password combination is invalid" });
+      }
+    });
+
+    const loginToken = jwt.sign(
+      {
+        id: user.id,
+        sub: user.email,
+      },
+
+      process.env.JWT_SECRET as string
+      // {
+      //   expiresIn: "8h",
+      // }
+    );
+
+    // const user: User = await knex("users").where({ id: token.id }).first();
+    // const user: User = await knex("users").where("id", id).first();
+    console.log(loginToken);
+
+    res.status(200).json({ authToken: loginToken });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "There was an error fetching the user profile" + error,
+    });
+  }
+};
+
+const getAuthedUser = async (req: JWTRequest, res: Response): Promise<void> => {
+  const token = req.token as JwtPayload;
+
+  try {
+    const user: User = await knex("users").where({ id: token.id }).first();
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "There was an error fetching the user profile " + error,
+    });
+  }
+};
+
+export { getAllUsers, createUser, getUserById, login, getAuthedUser };
