@@ -30,7 +30,33 @@ const getSinglePostById = async (id: string) => {
       )
     )
     .groupBy("posts.id")
+    .where({ "posts.id": id })
     .first();
 };
 
-export { getPostsAndTags, getSinglePostById };
+const getPosts = async () => {
+  return await knex("posts")
+    .select(
+      "posts.*",
+      knex("tags")
+        .select(
+          knex.raw(
+            "JSON_ARRAYAGG(JSON_OBJECT('id', tags.id, 'name', tags.name))"
+          )
+        )
+        .join("posts_tags", "tags.id", "posts_tags.tag_id")
+        .whereRaw("posts_tags.post_id = posts.id")
+        .as("tags"),
+      knex("comments")
+        .select(
+          knex.raw(
+            "JSON_ARRAYAGG(JSON_OBJECT('id', comments.id, 'content', comments.content, 'created_at', comments.created_at))"
+          )
+        )
+        .whereRaw("comments.post_id = posts.id")
+        .as("comments")
+    )
+    .groupBy("posts.id");
+};
+
+export { getPostsAndTags, getSinglePostById, getPosts };

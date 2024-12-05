@@ -34,7 +34,7 @@ export type User = {
   updated_at: Date;
 };
 
-export type Comment = {
+export type UserComment = {
   id: string;
   content: string;
   user: User;

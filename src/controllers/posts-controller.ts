@@ -4,19 +4,30 @@ import knexConfig from "../../knexfile.ts";
 import { title } from "process";
 import { PostSchema, TagSchema } from "../utils/schemas.ts";
 import { Post } from "../utils/types.ts";
-import { getPostsAndTags, getSinglePostById } from "../utils/helpers.ts";
+import {
+  getPosts,
+  getPostsAndTags,
+  getSinglePostById,
+} from "../utils/helpers.ts";
 
 const knex = initKnex(knexConfig);
 
-const getAllPosts = async (req: Request, res: Response): Promise<void> => {
+const getOnlyPosts = async (req: Request, res: Response): Promise<void> => {
   try {
-    const posts: Post[] = await getPostsAndTags();
-
-    console.log(posts);
-
-    // const posts: Post[] = await knex("posts");
+    const posts: Post[] = await knex("posts");
     res.status(200).json(posts);
   } catch (error) {
+    console.error(error);
+  }
+};
+
+const getAllPosts = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const posts: Post[] = await getPosts();
+
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json(error);
     console.error(error);
   }
 };
@@ -89,4 +100,4 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export { getAllPosts, createPost, getPostById };
+export { getAllPosts, createPost, getPostById, getOnlyPosts };

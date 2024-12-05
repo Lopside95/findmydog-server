@@ -28,16 +28,14 @@ const getCommentsByPost = async (
 const createComment = async (req: Request, res: Response): Promise<void> => {
   try {
     const id = req.params.id;
-    const post = await getSinglePostById(id);
 
     const payload = req.body;
 
     const newComment: CommentSchema[] = await knex("comments").insert({
       content: payload.content,
       post_id: id,
+      // user_id would be found by which user is logged in/ the sesssion
     });
-
-    // const newComment = await knex("comments").where({ id: newCommentIds[0] });
 
     res.status(201).json(newComment);
   } catch (error) {
