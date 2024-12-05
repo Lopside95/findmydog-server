@@ -35,6 +35,23 @@ export const userSchema = z.object({
   active: z.boolean().default(true),
 });
 
+export const commentSchema = z.object({
+  content: z.string(),
+  post: postSchema,
+  user: userSchema,
+});
+
+export type CommentSchema = z.infer<typeof commentSchema>;
+
+// export type Comment = {
+//   id: string;
+//   content: string;
+//   user: User;
+//   post: Post;
+//   created_at: Date;
+//   updated_at: Date;
+// };
+
 export type PostSchema = z.infer<typeof postSchema>;
 export type TagSchema = z.infer<typeof tag>;
 export type UserSchema = z.infer<typeof userSchema>;
