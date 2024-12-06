@@ -98,12 +98,12 @@ const login = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const getAuthedUser = async (req: Request, res: Response): Promise<void> => {
+const getAuthedUser = async (req: JWTRequest, res: Response): Promise<void> => {
   // const token = req.token as JwtPayload;
 
   try {
     const user: User = await knex("users")
-      .where({ id: req.body.token })
+      .where({ id: req.body.token.id })
       .first();
 
     res.status(200).json(user);
