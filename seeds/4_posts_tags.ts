@@ -33,16 +33,36 @@ export async function seed(knex: Knex) {
       tag_id: 4,
     },
     {
-      post_id: 4,
+      post_id: 8,
       tag_id: 5,
     },
     {
-      post_id: 5,
+      post_id: 7,
       tag_id: 5,
     },
     {
-      post_id: 5,
+      post_id: 6,
       tag_id: 6,
+    },
+    {
+      post_id: 9,
+      tag_id: 4,
+    },
+    {
+      post_id: 10,
+      tag_id: 4,
+    },
+    {
+      post_id: 4,
+      tag_id: 1,
+    },
+    {
+      post_id: 5,
+      tag_id: 5,
+    },
+    {
+      post_id: 5,
+      tag_id: 7,
     },
   ]);
 }
