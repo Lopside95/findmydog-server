@@ -43,8 +43,6 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
         .json({ message: "Couldn't encrypt the supplied password" });
     }
 
-    // const hashedPass = bcrypt.hash(req.body.password, SALT_ROUNDS)
-
     try {
       const payload = req.body;
 
@@ -89,14 +87,7 @@ const login = async (req: Request, res: Response): Promise<void> => {
       },
 
       process.env.JWT_SECRET as string
-      // {
-      //   expiresIn: "8h",
-      // }
     );
-
-    // const user: User = await knex("users").where({ id: token.id }).first();
-    // const user: User = await knex("users").where("id", id).first();
-    console.log(loginToken);
 
     res.status(200).json({ authToken: loginToken });
   } catch (error) {
@@ -107,11 +98,13 @@ const login = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const getAuthedUser = async (req: JWTRequest, res: Response): Promise<void> => {
-  const token = req.token as JwtPayload;
+const getAuthedUser = async (req: Request, res: Response): Promise<void> => {
+  // const token = req.token as JwtPayload;
 
   try {
-    const user: User = await knex("users").where({ id: token.id }).first();
+    const user: User = await knex("users")
+      .where({ id: req.body.token })
+      .first();
 
     res.status(200).json(user);
   } catch (error) {

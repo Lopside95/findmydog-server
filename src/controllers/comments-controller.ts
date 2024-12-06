@@ -6,6 +6,8 @@ import { CommentSchema, PostSchema, TagSchema } from "../utils/schemas.ts";
 import { Post } from "../utils/types.ts";
 import { getPostsAndTags, getSinglePostById } from "../utils/helpers.ts";
 import { getPostById } from "./posts-controller.ts";
+import { JwtPayload } from "jsonwebtoken";
+import { JWTRequest } from "../middleware/auth.ts";
 
 const knex = initKnex(knexConfig);
 
@@ -25,19 +27,38 @@ const getCommentsByPost = async (
   }
 };
 
-const createComment = async (req: Request, res: Response): Promise<void> => {
+const createComment = async (req: JWTRequest, res: Response): Promise<void> => {
+  // const token = req.token as JwtPayload;
+
   try {
-    const id = req.params.id;
+    // res.status(200).json({ message: "found token " + req.body.token });
+    // return;
+    // const getAuthedUser
 
-    const payload = req.body;
+    // console.log("token", token);
 
-    const newComment: CommentSchema[] = await knex("comments").insert({
-      content: payload.content,
-      post_id: id,
+    console.log("from create comment");
+    // const payload = req.body;
+
+    // console.log("payload ", payload);
+
+    console.log(req.body.token);
+
+    const newCommentsId: CommentSchema[] = await knex("comments").insert({
+      content: req.body.content,
+      post_id: req.params.post_id,
+      user_id: req.body.token.id,
     });
+
+    const newComment: CommentSchema = await knex("comments")
+      .where({ id: newCommentsId[0] })
+      .first();
 
     res.status(201).json(newComment);
   } catch (error) {
+    res
+      .status(500)
+      .json({ message: "There was an error posting comment, " + error });
     console.error(error);
   }
 };

@@ -6,7 +6,7 @@ const knex = initKnex(knexConfig);
 
 const getHomePage = async (req: Request, res: Response): Promise<void> => {
   try {
-    res.status(200).send({ message: "this is coming from the home page" });
+    res.status(200).json({ message: "this is coming from the home page" });
   } catch (error) {
     console.error(error);
   }

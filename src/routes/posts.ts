@@ -8,6 +8,7 @@ import {
   createComment,
   getCommentsByPost,
 } from "../controllers/comments-controller.ts";
+import authorize from "../middleware/auth.ts";
 
 const router: Router = Router();
 
@@ -19,6 +20,7 @@ router.post("/", createPost);
 
 router.get("/:id/comments", getCommentsByPost);
 
-router.post("/:id/comments", createComment);
+// router.post("/:id/comments", createComment);
+router.post("/:id/comments", authorize, createComment);
 
 export default router;

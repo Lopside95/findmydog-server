@@ -31,7 +31,8 @@ const authorize = (
       return;
     }
 
-    req.token = decodedToken;
+    // add decoded token to the payload
+    req.body.token = decodedToken;
     next();
   });
 };

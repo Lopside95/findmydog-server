@@ -1,10 +1,13 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express, Request, Response, Router } from "express";
 import "dotenv/config";
 import posts from "./routes/posts.ts";
 import users from "./routes/users.ts";
 import tags from "./routes/tags.ts";
 import home from "./routes/home.ts";
 import cors from "cors";
+import { JWTRequest } from "./middleware/auth.ts";
+
+const router: Router = Router();
 
 const app: Express = express();
 
