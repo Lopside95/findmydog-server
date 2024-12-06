@@ -44,9 +44,15 @@ export type UserComment = {
 };
 
 export enum PostType {
-  "GENERAL",
-  "REPORT",
+  "LOST",
+  "FOUND",
+  "SIGHTING",
 }
+// export enum PostType {
+//   "LOST",
+//   "FOUND",
+//   "SIGHTING",
+// }
 
 export enum PostStatus {
   "OPEN",

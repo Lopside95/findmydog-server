@@ -11,7 +11,7 @@ export async function up(knex: Knex) {
     table.string("longitude");
     table.string("latitude");
     table.integer("urgency").notNullable();
-    table.enu("type", ["GENERAL", "REPORT"]).notNullable();
+    table.enu("type", ["LOST", "FOUND", "SIGHTING"]).notNullable();
     table.enu("status", ["OPEN", "CLOSED"]).notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table
