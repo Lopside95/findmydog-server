@@ -12,9 +12,7 @@ const router: Router = Router();
 
 router.get("/", getAllUsers);
 router.post("/signup", createUser);
-// router.post("/signup", authorize, createUser);
 router.post("/login", login);
 router.get("/account", authorize, getAuthedUser);
-// router.get("/:id", getUserById);
 
 export default router;

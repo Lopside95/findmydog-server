@@ -21,7 +21,6 @@ const authorize = (
       .json({ message: "An authentication token is required for this route" });
     return;
   }
-  console.log("authHeader in authorize", authHeader);
   const token = authHeader.split(" ")[1];
 
   jwt.verify(token, jwtSecret, (err, decodedToken) => {
