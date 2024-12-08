@@ -21,6 +21,6 @@ router.post("/", createPost);
 router.get("/:id/comments", getCommentsByPost);
 
 // router.post("/:id/comments", createComment);
-router.post("/:id/comments", authorize, createComment);
+router.post("/:id", authorize, createComment);
 
 export default router;

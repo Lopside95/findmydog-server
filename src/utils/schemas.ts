@@ -37,8 +37,8 @@ export const userSchema = z.object({
 
 export const commentSchema = z.object({
   content: z.string(),
-  post_id: z.string(),
-  user_id: z.string().optional(),
+  // post_id: z.string(),
+  // user_id: z.string(),
   // post: postSchema,
   // user: userSchema,
 });

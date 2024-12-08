@@ -61,7 +61,7 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
     }
   });
 };
-const login = async (req: Request, res: Response): Promise<void> => {
+const login = async (req: JWTRequest, res: Response): Promise<void> => {
   try {
     // const id = req.params.id;
     // const token = req.token as JwtPayload;
@@ -70,7 +70,10 @@ const login = async (req: Request, res: Response): Promise<void> => {
       .where({ email: req.body.email })
       .first();
 
-    console.log("user in login", user);
+    if (!user.password) {
+      res.status(404).json({ message: "Couldn't find user password" });
+      return;
+    }
 
     bcrypt.compare(password, user.password, function (_, success) {
       if (!success) {
@@ -89,28 +92,37 @@ const login = async (req: Request, res: Response): Promise<void> => {
       process.env.JWT_SECRET as string
     );
 
+    console.log("loginToken", loginToken);
+
     res.status(200).json({ authToken: loginToken });
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      message: "There was an error fetching the user profile" + error,
+      message: "There was an error logging in" + error,
     });
   }
 };
 
 const getAuthedUser = async (req: JWTRequest, res: Response): Promise<void> => {
-  // const token = req.token as JwtPayload;
+  const token = req.token as JwtPayload;
+
+  console.log("tokentokemn", token);
 
   try {
+    console.log("idinfet", req.body.token.id);
+
     const user: User = await knex("users")
       .where({ id: req.body.token.id })
       .first();
 
+    console.log("useringet", user);
+
     res.status(200).json(user);
+    delete user.password;
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      message: "There was an error fetching the user profile " + error,
+      message: "There was an error getting authed user " + error,
     });
   }
 };

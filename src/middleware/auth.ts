@@ -15,14 +15,13 @@ const authorize = (
 ): void => {
   const authHeader = req.headers.authorisation as string;
 
-  console.log("authHeader in authorize", authHeader);
-
   if (!authHeader) {
     res
       .status(401)
       .json({ message: "An authentication token is required for this route" });
     return;
   }
+  console.log("authHeader in authorize", authHeader);
   const token = authHeader.split(" ")[1];
 
   jwt.verify(token, jwtSecret, (err, decodedToken) => {
