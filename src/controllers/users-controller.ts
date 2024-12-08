@@ -92,8 +92,6 @@ const login = async (req: JWTRequest, res: Response): Promise<void> => {
       process.env.JWT_SECRET as string
     );
 
-    console.log("loginToken", loginToken);
-
     res.status(200).json({ authToken: loginToken });
   } catch (error) {
     console.error(error);
@@ -106,16 +104,10 @@ const login = async (req: JWTRequest, res: Response): Promise<void> => {
 const getAuthedUser = async (req: JWTRequest, res: Response): Promise<void> => {
   const token = req.token as JwtPayload;
 
-  console.log("tokentokemn", token);
-
   try {
-    console.log("idinfet", req.body.token.id);
-
     const user: User = await knex("users")
       .where({ id: req.body.token.id })
       .first();
-
-    console.log("useringet", user);
 
     res.status(200).json(user);
     delete user.password;

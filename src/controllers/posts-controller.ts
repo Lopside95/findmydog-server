@@ -49,6 +49,15 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
 
     const tags = data.tags;
 
+    console.log("data", data);
+
+    // try {
+    //   const newCommentsId: CommentSchema[] = await knex("comments").insert({
+    //     content: req.body.content,
+    //     post_id: req.params.id,
+    //     user_id: req.body.token.id,
+    //   });
+
     const newPostIds: PostSchema[] = await knex("posts").insert({
       title: data.title,
       longitude: data.longitude,
@@ -58,6 +67,7 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
       urgency: data.urgency,
       type: data.PostType,
       status: data.PostStatus,
+      user_id: req.body.token.id,
     });
 
     tags.forEach(async (tag: TagSchema) => {
@@ -71,8 +81,7 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
     res.status(201).json(newPost);
   } catch (error) {
     res.status(500).json({
-      message: "There was an error creating this post",
-      error,
+      message: "There was an error creating this post" + error,
     });
     console.error(error);
   }

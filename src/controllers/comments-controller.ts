@@ -31,19 +31,6 @@ const createComment = async (req: Request, res: Response): Promise<void> => {
   // const token = req.token as JwtPayload;
 
   try {
-    // res.status(200).json({ message: "found token " + req.body.token.id });
-    // return;
-    // const getAuthedUser
-
-    // console.log("token", token);
-    debugger;
-    console.log("from create comment");
-    // const payload = req.body;
-
-    // console.log("payload ", payload);
-
-    console.log(req.body.token.id);
-
     const newCommentsId: CommentSchema[] = await knex("comments").insert({
       content: req.body.content,
       post_id: req.params.id,

@@ -16,7 +16,7 @@ router.get("/", getAllPosts);
 
 router.get("/:id", getPostById);
 
-router.post("/", createPost);
+router.post("/", authorize, createPost);
 
 router.get("/:id/comments", getCommentsByPost);
 
