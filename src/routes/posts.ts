@@ -3,12 +3,12 @@ import {
   createPost,
   getAllPosts,
   getPostById,
-} from "../controllers/posts-controller.ts";
+} from "../controllers/posts-controller";
 import {
   createComment,
   getCommentsByPost,
-} from "../controllers/comments-controller.ts";
-import authorize from "../middleware/auth.ts";
+} from "../controllers/comments-controller";
+import authorize from "../middleware/auth";
 
 const router: Router = Router();
 

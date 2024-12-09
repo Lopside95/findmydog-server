@@ -26,7 +26,40 @@ export async function seed(knex: Knex) {
       name: "Aggressive",
     },
     {
-      name: "Feeding Issues",
+      name: "Brown",
+    },
+    {
+      name: "Black",
+    },
+    {
+      name: "White",
+    },
+    {
+      name: "Small",
+    },
+    {
+      name: "Medium",
+    },
+    {
+      name: "Large",
+    },
+    {
+      name: "Labrador",
+    },
+    {
+      name: "Beagle",
+    },
+    {
+      name: "Mix",
+    },
+    {
+      name: "Pointer",
+    },
+    {
+      name: "Poodle",
+    },
+    {
+      name: "Daschund",
     },
   ]);
 }

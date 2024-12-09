@@ -5,6 +5,7 @@ import {
   getAuthedUser,
   getUserById,
   login,
+  updateUser,
 } from "../controllers/users-controller";
 import authorize from "../middleware/auth";
 
@@ -14,5 +15,6 @@ router.get("/", getAllUsers);
 router.post("/signup", createUser);
 router.post("/login", login);
 router.get("/account", authorize, getAuthedUser);
+// router.put("/account", updateUser);
 
 export default router;

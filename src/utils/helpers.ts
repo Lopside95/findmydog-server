@@ -1,10 +1,14 @@
 import { Router, Request, Response } from "express";
 import initKnex from "knex";
-import knexConfig from "../../knexfile.ts";
+import knexConfig from "../../knexfile";
 import { title } from "process";
-import { PostSchema, TagSchema } from "../utils/schemas.ts";
-import { Post } from "../utils/types.ts";
+import { PostSchema, TagSchema } from "../utils/schemas";
+import { Post } from "../utils/types";
 const knex = initKnex(knexConfig);
+
+import bcrypt from "bcrypt";
+
+const SALT_ROUNDS = 10;
 
 const getPostsAndTags = async () => {
   return await knex("posts")
@@ -59,4 +63,38 @@ const getPosts = async () => {
     .groupBy("posts.id");
 };
 
-export { getPostsAndTags, getSinglePostById, getPosts };
+const hashPassword = async (password: string) => {
+  try {
+    const hash = await bcrypt.hash(password, SALT_ROUNDS);
+    return hash;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      console.error(error);
+    }
+
+    // throw new Error(error.message);
+  }
+
+  // bcrypt.hash(password, SALT_ROUNDS, (err, hash) => {
+  // //   if (err) {
+  // //     return err.message;
+  // //   }
+
+  // //   return hash;
+  // // });
+};
+
+//   const hashedPaass  = (req.body.password, SALT_ROUNDS, async (err, hashedPassword) => {
+//     if (err) {
+//       return res
+//         .status(500)
+//         .json({ message: "Couldn't encrypt the supplied password" });
+
+// }
+//   })
+
+//   bcrypt.hash(req.body.password, SALT_ROUNDS, async (err, hashedPassword) => {
+
+export { getPostsAndTags, getSinglePostById, getPosts, hashPassword };

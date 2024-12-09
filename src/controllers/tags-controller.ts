@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import initKnex from "knex";
-import knexConfig from "../../knexfile.ts";
-import { TagSchema } from "../utils/schemas.ts";
+import knexConfig from "../../knexfile";
+import { TagSchema } from "../utils/schemas";
 
 const knex = initKnex(knexConfig);
 

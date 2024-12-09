@@ -1,5 +1,5 @@
 import { Knex } from "knex";
-import knex from "../knexfile.ts";
+import knex from "../knexfile";
 import { v4 as uuidv4 } from "uuid";
 
 export async function up(knex: Knex) {
@@ -22,7 +22,7 @@ export async function down(knex: Knex): Promise<void> {
 }
 
 // import { Knex } from "knex";
-// import knex from "../knexfile.ts";
+// import knex from "../knexfile";
 // export async function up(knex: Knex) {
 //   await knex.schema.createTable("users", function (table) {
 //     table.increments("id").primary();

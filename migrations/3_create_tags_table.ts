@@ -1,5 +1,5 @@
 import { Knex } from "knex";
-import knex from "../knexfile.ts";
+import knex from "../knexfile";
 
 export async function up(knex: Knex) {
   await knex.schema.createTable("tags", function (table) {

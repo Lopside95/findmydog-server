@@ -1,5 +1,5 @@
 import { Knex } from "knex";
-import knex from "../knexfile.ts";
+import knex from "../knexfile";
 import { v4 as uuidv4 } from "uuid";
 
 export async function up(knex: Knex) {

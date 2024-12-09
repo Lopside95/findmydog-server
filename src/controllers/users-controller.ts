@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
 import initKnex from "knex";
-import knexConfig from "../../knexfile.ts";
-import { User } from "../utils/types.ts";
-import { UserSchema } from "../utils/schemas.ts";
-import { JWTRequest } from "../middleware/auth.ts";
+import knexConfig from "../../knexfile";
+import { User } from "../utils/types";
+import { UserSchema } from "../utils/schemas";
+import { JWTRequest } from "../middleware/auth";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
@@ -61,6 +61,7 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
     }
   });
 };
+
 const login = async (req: JWTRequest, res: Response): Promise<void> => {
   try {
     // const id = req.params.id;
@@ -119,4 +120,40 @@ const getAuthedUser = async (req: JWTRequest, res: Response): Promise<void> => {
   }
 };
 
-export { getAllUsers, createUser, getUserById, login, getAuthedUser };
+const updateUser = async (req: JWTRequest, res: Response): Promise<void> => {
+  if (req.body.password) {
+    bcrypt.hash(req.body.password, SALT_ROUNDS, async (err, hashedPassword) => {
+      if (err) {
+        return res
+          .status(500)
+          .json({ message: "Couldn't encrypt the supplied password" });
+      }
+
+      try {
+        const payload = req.body;
+
+        const updatedUser: UserSchema = await knex("users").update({
+          first_name: payload.firstName,
+          last_name: payload.lastName,
+          email: payload.email,
+          password: hashedPassword,
+          active: true,
+        });
+      } catch (error) {
+        res.status(500).json({ message: "Couldn't create user" + error });
+        console.error(error);
+      }
+    });
+  }
+
+  return console.log("updatre");
+};
+
+export {
+  getAllUsers,
+  createUser,
+  getUserById,
+  login,
+  getAuthedUser,
+  updateUser,
+};

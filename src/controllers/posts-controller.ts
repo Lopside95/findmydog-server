@@ -1,14 +1,10 @@
 import { Router, Request, Response } from "express";
 import initKnex from "knex";
-import knexConfig from "../../knexfile.ts";
+import knexConfig from "../../knexfile";
 import { title } from "process";
-import { PostSchema, TagSchema } from "../utils/schemas.ts";
-import { Post } from "../utils/types.ts";
-import {
-  getPosts,
-  getPostsAndTags,
-  getSinglePostById,
-} from "../utils/helpers.ts";
+import { PostSchema, TagSchema } from "../utils/schemas";
+import { Post } from "../utils/types";
+import { getPosts, getPostsAndTags, getSinglePostById } from "../utils/helpers";
 
 const knex = initKnex(knexConfig);
 
@@ -48,15 +44,6 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
     const data = req.body;
 
     const tags = data.tags;
-
-    console.log("data", data);
-
-    // try {
-    //   const newCommentsId: CommentSchema[] = await knex("comments").insert({
-    //     content: req.body.content,
-    //     post_id: req.params.id,
-    //     user_id: req.body.token.id,
-    //   });
 
     const newPostIds: PostSchema[] = await knex("posts").insert({
       title: data.title,

@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import initKnex from "knex";
-import knexConfig from "../../knexfile.ts";
+import knexConfig from "../../knexfile";
 
 const knex = initKnex(knexConfig);
 

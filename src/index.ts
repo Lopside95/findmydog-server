@@ -1,11 +1,11 @@
 import express, { Express, Request, Response, Router } from "express";
 import "dotenv/config";
-import posts from "./routes/posts.ts";
-import users from "./routes/users.ts";
-import tags from "./routes/tags.ts";
-import home from "./routes/home.ts";
+import posts from "./routes/posts";
+import users from "./routes/users";
+import tags from "./routes/tags";
+import home from "./routes/home";
 import cors from "cors";
-import { JWTRequest } from "./middleware/auth.ts";
+// import { JWTRequest } from "./middleware/auth";
 
 const router: Router = Router();
 
