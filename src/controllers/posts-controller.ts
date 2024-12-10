@@ -5,6 +5,7 @@ import { title } from "process";
 import { PostSchema, TagSchema } from "../utils/schemas";
 import { Post } from "../utils/types";
 import { getPosts, getPostsAndTags, getSinglePostById } from "../utils/helpers";
+import multer, { diskStorage } from "multer";
 
 const knex = initKnex(knexConfig);
 
