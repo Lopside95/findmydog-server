@@ -54,8 +54,10 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
         active: true,
       });
 
+      // add onscreen message for duplicate entry
+
       res.status(201).json(newUserIds[0]);
-    } catch (error) {
+    } catch (error: unknown) {
       res.status(500).json({ message: "Couldn't create user" + error });
       console.error(error);
     }
@@ -72,15 +74,16 @@ const login = async (req: JWTRequest, res: Response): Promise<void> => {
       .first();
 
     if (!user.password) {
-      res.status(404).json({ message: "Couldn't find user password" });
+      console.log("No password");
       return;
     }
 
-    bcrypt.compare(password, user.password, function (_, success) {
+    bcrypt.compare(req.body.password, user.password, function (_, success) {
       if (!success) {
-        return res
-          .status(403)
-          .json({ message: "Email and password combination is invalid" });
+        return;
+        // return res
+        //   .status(403)
+        //   .json({ message: "Email and password combination is invalid" });
       }
     });
 
@@ -111,7 +114,6 @@ const getAuthedUser = async (req: JWTRequest, res: Response): Promise<void> => {
       .first();
 
     res.status(200).json(user);
-    delete user.password;
   } catch (error) {
     console.error(error);
     res.status(500).json({

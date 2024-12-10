@@ -8,7 +8,6 @@ export const tag = z.object({
 });
 
 export const postSchema = z.object({
-  // title: z.string().min(5),
   title: z.string().min(1, { message: "Title is required" }),
   img: z.string().optional(),
   description: z.string().min(1, { message: "Description is required" }),

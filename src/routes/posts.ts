@@ -9,7 +9,9 @@ import {
   getCommentsByPost,
 } from "../controllers/comments-controller";
 import authorize from "../middleware/auth";
+// import multer from "multer";
 
+// const upload = multer({ storage: multer.memoryStorage() });
 const router: Router = Router();
 
 router.get("/", getAllPosts);
