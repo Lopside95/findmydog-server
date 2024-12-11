@@ -64,7 +64,7 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
   });
 };
 
-const login = async (req: JWTRequest, res: Response): Promise<void> => {
+const login = async (req: JWTRequest, res: Response) => {
   try {
     // const id = req.params.id;
     // const token = req.token as JwtPayload;
@@ -96,7 +96,7 @@ const login = async (req: JWTRequest, res: Response): Promise<void> => {
       process.env.JWT_SECRET as string
     );
 
-    res.status(200).json({ authToken: loginToken });
+    res.status(200).json({ success: true, authToken: loginToken });
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -105,7 +105,7 @@ const login = async (req: JWTRequest, res: Response): Promise<void> => {
   }
 };
 
-const getAuthedUser = async (req: JWTRequest, res: Response): Promise<void> => {
+const getAuthedUser = async (req: JWTRequest, res: Response) => {
   const token = req.token as JwtPayload;
 
   try {
