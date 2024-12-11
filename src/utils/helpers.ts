@@ -73,17 +73,7 @@ const hashPassword = async (password: string) => {
     } else {
       console.error(error);
     }
-
-    // throw new Error(error.message);
   }
-
-  // bcrypt.hash(password, SALT_ROUNDS, (err, hash) => {
-  // //   if (err) {
-  // //     return err.message;
-  // //   }
-
-  // //   return hash;
-  // // });
 };
 
 //   const hashedPaass  = (req.body.password, SALT_ROUNDS, async (err, hashedPassword) => {

@@ -66,8 +66,6 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
 
 const login = async (req: JWTRequest, res: Response) => {
   try {
-    // const id = req.params.id;
-    // const token = req.token as JwtPayload;
     const password = req.body.password;
     const user: User = await knex("users")
       .where({ email: req.body.email })
@@ -147,8 +145,6 @@ const updateUser = async (req: JWTRequest, res: Response): Promise<void> => {
       }
     });
   }
-
-  return console.log("updatre");
 };
 
 export {

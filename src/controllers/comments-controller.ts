@@ -28,8 +28,6 @@ const getCommentsByPost = async (
 };
 
 const createComment = async (req: Request, res: Response): Promise<void> => {
-  // const token = req.token as JwtPayload;
-
   try {
     const newCommentsId: CommentSchema[] = await knex("comments").insert({
       content: req.body.content,

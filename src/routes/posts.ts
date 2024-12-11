@@ -10,7 +10,6 @@ import {
 } from "../controllers/comments-controller";
 import authorize from "../middleware/auth";
 
-// const upload = multer({ storage: multer.memoryStorage() });
 const router: Router = Router();
 
 router.get("/", getAllPosts);
@@ -21,7 +20,6 @@ router.post("/", authorize, createPost);
 
 router.get("/:id/comments", getCommentsByPost);
 
-// router.post("/:id/comments", createComment);
 router.post("/:id", authorize, createComment);
 
 export default router;
