@@ -76,6 +76,16 @@ const hashPassword = async (password: string) => {
   }
 };
 
+const checkPassword = async (reqPassword: string, userPassword: string) => {
+  const validPass = await bcrypt.compare(reqPassword, userPassword);
+
+  if (!validPass) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
 //   const hashedPaass  = (req.body.password, SALT_ROUNDS, async (err, hashedPassword) => {
 //     if (err) {
 //       return res
@@ -87,4 +97,10 @@ const hashPassword = async (password: string) => {
 
 //   bcrypt.hash(req.body.password, SALT_ROUNDS, async (err, hashedPassword) => {
 
-export { getPostsAndTags, getSinglePostById, getPosts, hashPassword };
+export {
+  getPostsAndTags,
+  getSinglePostById,
+  getPosts,
+  hashPassword,
+  checkPassword,
+};

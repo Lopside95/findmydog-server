@@ -6,6 +6,7 @@ import { UserSchema } from "../utils/schemas";
 import { JWTRequest } from "../middleware/auth";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { checkPassword } from "../utils/helpers";
 
 const SALT_ROUNDS = 10;
 
@@ -66,7 +67,7 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
 
 const login = async (req: JWTRequest, res: Response) => {
   try {
-    const password = req.body.password;
+    // const password = req.body.password;
     const user: User = await knex("users")
       .where({ email: req.body.email })
       .first();
@@ -76,25 +77,30 @@ const login = async (req: JWTRequest, res: Response) => {
       return;
     }
 
-    bcrypt.compare(req.body.password, user.password, function (_, success) {
-      if (!success) {
-        return;
-        // return res
-        //   .status(403)
-        //   .json({ message: "Email and password combination is invalid" });
+    bcrypt.compare(req.body.password, user.password, function (err, success) {
+      if (!success || err) {
+        return res.status(403).json({
+          message: "Email and password combination is invalid " + err,
+        });
+      }
+
+      if (err) {
+        return res.status(500).json({ message: "Error logging in" + err });
+      }
+      if (success) {
+        const loginToken = jwt.sign(
+          {
+            id: user.id,
+            sub: user.email,
+          },
+
+          process.env.JWT_SECRET as string,
+          { expiresIn: "8h" }
+        );
+
+        return res.status(200).json({ authToken: loginToken });
       }
     });
-
-    const loginToken = jwt.sign(
-      {
-        id: user.id,
-        sub: user.email,
-      },
-
-      process.env.JWT_SECRET as string
-    );
-
-    res.status(200).json({ success: true, authToken: loginToken });
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -104,7 +110,7 @@ const login = async (req: JWTRequest, res: Response) => {
 };
 
 const getAuthedUser = async (req: JWTRequest, res: Response) => {
-  const token = req.token as JwtPayload;
+  // const token = req.token as JwtPayload;
 
   try {
     const user: User = await knex("users")
@@ -132,13 +138,15 @@ const updateUser = async (req: JWTRequest, res: Response): Promise<void> => {
       try {
         const payload = req.body;
 
-        const updatedUser: UserSchema = await knex("users").update({
+        const userPayload: UserSchema = await knex("users").update({
           first_name: payload.firstName,
           last_name: payload.lastName,
           email: payload.email,
           password: hashedPassword,
           active: true,
         });
+
+        res.status(200).json(userPayload);
       } catch (error) {
         res.status(500).json({ message: "Couldn't create user" + error });
         console.error(error);
