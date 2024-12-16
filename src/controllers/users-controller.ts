@@ -94,11 +94,10 @@ const login = async (req: JWTRequest, res: Response) => {
             sub: user.email,
           },
 
-          process.env.JWT_SECRET as string,
-          { expiresIn: "8h" }
+          process.env.JWT_SECRET as string
         );
 
-        return res.status(200).json({ authToken: loginToken });
+        return res.status(200).json({ success: true, authToken: loginToken });
       }
     });
   } catch (error) {
@@ -127,6 +126,10 @@ const getAuthedUser = async (req: JWTRequest, res: Response) => {
 };
 
 const updateUser = async (req: JWTRequest, res: Response): Promise<void> => {
+  const user: User = await knex("users")
+    .where({ email: req.body.email })
+    .first();
+
   if (req.body.password) {
     bcrypt.hash(req.body.password, SALT_ROUNDS, async (err, hashedPassword) => {
       if (err) {
@@ -134,17 +137,18 @@ const updateUser = async (req: JWTRequest, res: Response): Promise<void> => {
           .status(500)
           .json({ message: "Couldn't encrypt the supplied password" });
       }
-
       try {
         const payload = req.body;
 
-        const userPayload: UserSchema = await knex("users").update({
-          first_name: payload.firstName,
-          last_name: payload.lastName,
-          email: payload.email,
-          password: hashedPassword,
-          active: true,
-        });
+        const userPayload: UserSchema = await knex("users")
+          .where({ id: user.id })
+          .update({
+            first_name: payload.firstName,
+            last_name: payload.lastName,
+            email: payload.email,
+            password: hashedPassword,
+            active: true,
+          });
 
         res.status(200).json(userPayload);
       } catch (error) {
