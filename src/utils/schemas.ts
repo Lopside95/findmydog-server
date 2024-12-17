@@ -23,7 +23,7 @@ export const postSchema = z.object({
 export const userSchema = z.object({
   first_name: z.string().min(1),
   last_name: z.string(),
-  email: z.string().email(),
+  email: z.string().trim().email().toLowerCase(),
   password: z.string(),
   active: z.boolean().default(true),
 });
