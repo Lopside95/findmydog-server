@@ -1,13 +1,8 @@
-import { Router, Request, Response } from "express";
+import { Request, Response } from "express";
 import initKnex from "knex";
 import knexConfig from "../../knexfile";
-import { title } from "process";
-import { CommentSchema, PostSchema, TagSchema } from "../utils/schemas";
-import { Post } from "../utils/types";
-import { getPostsAndTags, getSinglePostById } from "../utils/helpers";
-import { getPostById } from "./posts-controller";
-import { JwtPayload } from "jsonwebtoken";
-import { JWTRequest } from "../middleware/auth";
+import { CommentSchema } from "../utils/schemas";
+import { getSinglePostById } from "../utils/helpers";
 
 const knex = initKnex(knexConfig);
 

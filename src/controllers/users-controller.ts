@@ -1,12 +1,11 @@
-import { Router, Request, Response } from "express";
+import { Request, Response } from "express";
 import initKnex from "knex";
 import knexConfig from "../../knexfile";
 import { User } from "../utils/types";
 import { UserSchema } from "../utils/schemas";
 import { JWTRequest } from "../middleware/auth";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { checkPassword } from "../utils/helpers";
 
 const SALT_ROUNDS = 10;
 

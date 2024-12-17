@@ -12,7 +12,7 @@ export type Post = {
   title: string;
   img?: string;
   description: string;
-  urgency: number; // use colours / etc. in frontend
+  urgency: number;
   type: PostType;
   status: PostStatus;
   tags: Tag[];
@@ -48,11 +48,6 @@ export enum PostType {
   "FOUND",
   "SIGHTING",
 }
-// export enum PostType {
-//   "LOST",
-//   "FOUND",
-//   "SIGHTING",
-// }
 
 export enum PostStatus {
   "OPEN",

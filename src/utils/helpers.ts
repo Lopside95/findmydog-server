@@ -1,9 +1,6 @@
-import { Router, Request, Response } from "express";
 import initKnex from "knex";
 import knexConfig from "../../knexfile";
-import { title } from "process";
-import { PostSchema, TagSchema } from "../utils/schemas";
-import { Post } from "../utils/types";
+
 const knex = initKnex(knexConfig);
 
 import bcrypt from "bcrypt";
@@ -85,17 +82,6 @@ const checkPassword = async (reqPassword: string, userPassword: string) => {
     return true;
   }
 };
-
-//   const hashedPaass  = (req.body.password, SALT_ROUNDS, async (err, hashedPassword) => {
-//     if (err) {
-//       return res
-//         .status(500)
-//         .json({ message: "Couldn't encrypt the supplied password" });
-
-// }
-//   })
-
-//   bcrypt.hash(req.body.password, SALT_ROUNDS, async (err, hashedPassword) => {
 
 export {
   getPostsAndTags,

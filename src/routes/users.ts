@@ -1,9 +1,8 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 import {
   createUser,
   getAllUsers,
   getAuthedUser,
-  getUserById,
   login,
   updateUser,
 } from "../controllers/users-controller";

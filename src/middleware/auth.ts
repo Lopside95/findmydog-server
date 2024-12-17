@@ -1,6 +1,6 @@
 import "dotenv/config";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { Router, Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 
 const jwtSecret = process.env.JWT_SECRET as string;
 

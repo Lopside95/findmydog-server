@@ -1,11 +1,9 @@
-import { Router, Request, Response } from "express";
+import { Request, Response } from "express";
 import initKnex from "knex";
 import knexConfig from "../../knexfile";
-import { title } from "process";
 import { PostSchema, TagSchema } from "../utils/schemas";
 import { Post } from "../utils/types";
-import { getPosts, getPostsAndTags, getSinglePostById } from "../utils/helpers";
-import multer, { diskStorage } from "multer";
+import { getPosts, getSinglePostById } from "../utils/helpers";
 
 const knex = initKnex(knexConfig);
 
