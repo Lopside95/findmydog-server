@@ -22,6 +22,7 @@ app.use("/users", users);
 app.use("/tags", tags);
 
 const port = process.env.PORT || 8000;
+export { app };
 
 app.listen(port, () => {
   console.log("Server is running on port " + port);
