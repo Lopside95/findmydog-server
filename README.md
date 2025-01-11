@@ -1,11 +1,13 @@
+## Server of Find My Dog 
 
-# Backend for Find My Dog
-## Made with Node, Express, TypeScript, Knex 
-### The live site is available here: https://findmydog.vercel.app/
+### Made with TypeScript, Express, Axios, Knex
+
+### The live site is available here: https://findmydog.vercel.app
+### Client: https://github.com/Lopside95/client-capstone
 
 ## To run locally: 
-#### 1: Clone repository, add .env variables as shown in the .env.example. 
+#### 1: Clone repository.
 #### 2: Add .env variables as shown in the .env.example. 
-#### 3: Install dependencies with 'pnpm i'
-#### 4: 'pnpm run dev'
+#### 3: Install dependencies with 'pnpm i'.
+#### 4: 'pnpm run dev'.
 
