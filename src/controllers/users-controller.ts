@@ -45,7 +45,6 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
 
     try {
       const payload = req.body;
-
       const newUserIds: UserSchema[] = await knex("users").insert({
         first_name: payload.firstName,
         last_name: payload.lastName,
@@ -56,7 +55,9 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
 
       // add onscreen message for duplicate entry
 
-      res.status(201).json(newUserIds[0]);
+      const newUser = await knex("users").where({ id: newUserIds[0] }).first();
+
+      res.status(201).json(newUser);
     } catch (error: unknown) {
       res.status(500).json({ message: "Couldn't create user" + error });
       console.error(error);

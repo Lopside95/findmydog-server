@@ -25,6 +25,13 @@ export const userSchema = z.object({
   password: z.string(),
   active: z.boolean().default(true),
 });
+export const clientUserSchema = z.object({
+  firstName: z.string().min(1),
+  lastName: z.string(),
+  email: z.string().trim().email().toLowerCase(),
+  password: z.string(),
+  // active: z.boolean().default(true),
+});
 
 export const commentSchema = z.object({
   content: z.string(),
@@ -34,3 +41,4 @@ export type CommentSchema = z.infer<typeof commentSchema>;
 export type PostSchema = z.infer<typeof postSchema>;
 export type TagSchema = z.infer<typeof tag>;
 export type UserSchema = z.infer<typeof userSchema>;
+export type ClientUserSchema = z.infer<typeof clientUserSchema>;

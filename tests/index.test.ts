@@ -1,6 +1,7 @@
 import request from "supertest";
 import { describe, it, expect } from "vitest";
 import { app } from "../src/index";
+import { userData } from "./fixtures";
 
 describe("get home page", () => {
   it("should return 200 for get home page", async () => {
@@ -18,5 +19,18 @@ describe("Get all tags", () => {
       id: 1,
       name: "Brown",
     });
+  });
+});
+
+describe("Create user", () => {
+  it("should return 201 for user sign up and create a user in the db", async () => {
+    console.log("userData", userData);
+    const res = await request(app).post("/users/signup").send(userData);
+    console.log("resBody", res.body);
+    expect(res.status).toBe(201);
+    expect(res.body.first_name).toBe(userData.firstName);
+    expect(res.body.last_name).toBe(userData.lastName);
+    expect(res.body.email).toBe(userData.email);
+    expect(res.body.password).not.toBe(userData.password);
   });
 });
