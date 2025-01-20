@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 import {
   createPost,
+  deletePost,
   getAllPosts,
   getPostById,
 } from "../controllers/posts-controller";
@@ -15,6 +16,8 @@ const router: Router = Router();
 router.get("/", getAllPosts);
 
 router.get("/:id", getPostById);
+
+router.delete("/:id", authorize, deletePost);
 
 router.post("/", authorize, createPost);
 

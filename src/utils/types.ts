@@ -20,6 +20,7 @@ export type Post = {
   latitude?: number;
   created_at: Date;
   updated_at: Date;
+  user_id?: string;
 };
 
 export type User = {

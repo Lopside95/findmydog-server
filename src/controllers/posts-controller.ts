@@ -4,6 +4,7 @@ import knexConfig from "../../knexfile";
 import { PostSchema, TagSchema } from "../utils/schemas";
 import { Post } from "../utils/types";
 import { getPosts, getSinglePostById } from "../utils/helpers";
+import { JWTRequest } from "../middleware/auth";
 
 const knex = initKnex(knexConfig);
 
@@ -73,4 +74,47 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export { getAllPosts, createPost, getPostById, getOnlyPosts };
+const deletePost = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id = req.params.id;
+    console.log("id", id);
+    const user_id = req.body.token.id;
+
+    await knex("posts").where({ id: id }).del();
+    res.status(200).json({ message: "Post deleted" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "There was an error deleting this post" + error });
+    console.error(error);
+  }
+};
+
+// const deletePost = async (req: JWTRequest, res: Response): Promise<void> => {
+//   try {
+//     const postId = req.params.id;
+//     const user_id = req.body.token.id;
+
+//     const post = await knex("posts").where({ id: postId }).first();
+
+//     if (!post) {
+//       res.status(404).json({ message: "Post not found" });
+//       return;
+//     }
+
+//     if (post.author_id !== user_id) {
+//       res
+//         .status(403)
+//         .json({ message: "You are not authorized to delete this post" });
+//       return;
+//     }
+
+//     await knex("posts").where({ id: postId }).del();
+//     res.status(200).json({ message: "Post deleted" });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Error deleting post" + error });
+//   }
+// };
+
+export { getAllPosts, createPost, getPostById, getOnlyPosts, deletePost };
