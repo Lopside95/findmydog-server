@@ -67,7 +67,6 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
 
 const login = async (req: JWTRequest, res: Response) => {
   try {
-    // const password = req.body.password;
     const user: User = await knex("users")
       .where({ email: req.body.email })
       .first();
@@ -109,8 +108,6 @@ const login = async (req: JWTRequest, res: Response) => {
 };
 
 const getAuthedUser = async (req: JWTRequest, res: Response) => {
-  // const token = req.token as JwtPayload;
-
   try {
     const user: User = await knex("users")
       .where({ id: req.body.token.id })
