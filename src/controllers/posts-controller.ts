@@ -90,31 +90,4 @@ const deletePost = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// const deletePost = async (req: JWTRequest, res: Response): Promise<void> => {
-//   try {
-//     const postId = req.params.id;
-//     const user_id = req.body.token.id;
-
-//     const post = await knex("posts").where({ id: postId }).first();
-
-//     if (!post) {
-//       res.status(404).json({ message: "Post not found" });
-//       return;
-//     }
-
-//     if (post.author_id !== user_id) {
-//       res
-//         .status(403)
-//         .json({ message: "You are not authorized to delete this post" });
-//       return;
-//     }
-
-//     await knex("posts").where({ id: postId }).del();
-//     res.status(200).json({ message: "Post deleted" });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Error deleting post" + error });
-//   }
-// };
-
 export { getAllPosts, createPost, getPostById, getOnlyPosts, deletePost };

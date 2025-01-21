@@ -5,7 +5,6 @@ const userData: ClientUserSchema = {
   lastName: "User",
   email: "test@user.com",
   password: "testUser90",
-  //   active: true,
 };
 
 export { userData };

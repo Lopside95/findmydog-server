@@ -30,7 +30,6 @@ export const clientUserSchema = z.object({
   lastName: z.string(),
   email: z.string().trim().email().toLowerCase(),
   password: z.string(),
-  // active: z.boolean().default(true),
 });
 
 export const commentSchema = z.object({
