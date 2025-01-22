@@ -3,7 +3,7 @@ Find My Dog is a web-app that allows people to report missing dogs and list sigh
 
 
 
-TypeScript | MySQL | Axios | Knex
+TypeScript | MySQL | Knex
 
 <p>
   <img
@@ -16,11 +16,6 @@ TypeScript | MySQL | Axios | Knex
       width="40px"
       height="40px"
     /> 
-  &nbsp;
-    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/axios/axios-plain.svg"
-              width="40px"
-     height="40px"
-              />
   &nbsp;
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/knexjs/knexjs-original.svg" 
      width="40px"
