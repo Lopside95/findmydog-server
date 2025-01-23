@@ -1,13 +1,28 @@
-## Server of Find My Dog 
+## Find My Dog server repository
 
-### Made with TypeScript, Express, Axios, Knex
+Find My Dog is a web-app that allows people to report missing dogs and list sightings of lost or stray dogs.
 
-### The live site is available here: https://findmydog.vercel.app
-### Client: https://github.com/Lopside95/client-capstone
+TypeScript | MySQL | Knex
 
-## To run locally: 
-#### 1: Clone repository.
-#### 2: Add .env variables as shown in the .env.example. 
-#### 3: Install dependencies with 'pnpm i'.
-#### 4: 'pnpm run dev'.
+<p>
+  <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg"
+      width="40px"
+      height="40px"
+    />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" 
+      width="40px"
+      height="40px"
+    /> 
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/knexjs/knexjs-original.svg" 
+     width="40px"
+     height="40px"
+/>
 
+</p>
+
+### https://findmydog.vercel.app
+
+Client repo: https://github.com/Lopside95/findmydog-client
