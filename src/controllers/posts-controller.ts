@@ -31,7 +31,7 @@ const getAllPosts = async (req: Request, res: Response): Promise<void> => {
 const getPostById = async (req: Request, res: Response): Promise<void> => {
   try {
     const id = req.params.id;
-    const post = await getSinglePostById(id);
+    const post: Post = await getSinglePostById(id);
 
     res.status(200).json(post);
   } catch (error) {
