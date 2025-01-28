@@ -21,18 +21,33 @@ const getPostsAndTags = async () => {
 };
 
 const getSinglePostById = async (id: string) => {
-  return await knex("posts")
-    .leftJoin("posts_tags", "posts.id", "posts_tags.post_id")
-    .leftJoin("tags", "tags.id", "posts_tags.tag_id")
-    .select(
-      "posts.*",
-      knex.raw(
-        "JSON_ARRAYAGG(JSON_OBJECT('id', tags.id, 'name', tags.name)) as tags"
-      )
-    )
-    .groupBy("posts.id")
+  const post = await knex("posts")
+    .select("posts.*")
     .where({ "posts.id": id })
     .first();
+
+  if (!post) {
+    return null;
+  }
+
+  const tags = await knex("tags")
+    .join("posts_tags", "tags.id", "posts_tags.tag_id")
+    .where({ "posts_tags.post_id": id })
+    .select("tags.id", "tags.name");
+
+  const comments = await knex("comments")
+    .where({ "comments.post_id": id })
+    .select("comments.id", "comments.content", "comments.created_at");
+
+  return {
+    ...post,
+    tags: tags.map((tag) => ({ id: tag.id, name: tag.name })),
+    comments: comments.map((comment) => ({
+      id: comment.id,
+      content: comment.content,
+      created_at: comment.created_at,
+    })),
+  };
 };
 
 const getPosts = async () => {
