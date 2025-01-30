@@ -124,7 +124,7 @@ const getAuthedUser = async (req: JWTRequest, res: Response) => {
 
 const updateUser = async (req: JWTRequest, res: Response): Promise<void> => {
   const user: User = await knex("users")
-    .where({ email: req.body.email })
+    .where({ id: req.body.token.id })
     .first();
 
   if (req.body.password) {
@@ -136,7 +136,7 @@ const updateUser = async (req: JWTRequest, res: Response): Promise<void> => {
       }
       try {
         const payload = req.body;
-
+        console.log("payload", payload);
         const userPayload: UserSchema = await knex("users")
           .where({ id: user.id })
           .update({
@@ -149,7 +149,7 @@ const updateUser = async (req: JWTRequest, res: Response): Promise<void> => {
 
         res.status(200).json(userPayload);
       } catch (error) {
-        res.status(500).json({ message: "Couldn't create user " + error });
+        res.status(500).json({ message: "Couldn't update user " + error });
         console.error(error);
       }
     });

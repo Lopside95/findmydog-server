@@ -15,7 +15,7 @@ router.get("/", getAllUsers);
 router.post("/signup", createUser);
 router.post("/login", login);
 router.get("/account", authorize, getAuthedUser);
-router.put("/account", updateUser);
+router.put("/account", authorize, updateUser);
 router.delete("/account", deleteUser);
 
 export default router;

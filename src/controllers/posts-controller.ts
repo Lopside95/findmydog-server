@@ -85,7 +85,7 @@ const deletePost = async (req: Request, res: Response): Promise<void> => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "There was an error deleting this post" + error });
+      .json({ message: "There was an error deleting this post " + error });
     console.error(error);
   }
 };
