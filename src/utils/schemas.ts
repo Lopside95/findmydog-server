@@ -25,6 +25,15 @@ export const userSchema = z.object({
   password: z.string().optional(),
   active: z.boolean().default(true),
 });
+export const updateUserSchema = z.object({
+  first_name: z.string().min(1),
+  last_name: z.string(),
+  email: z.string().trim().email().toLowerCase().optional(),
+  password: z.string().optional(),
+  // new_password: z.string().optional(),
+  active: z.boolean().default(true),
+});
+
 export const clientUserSchema = z.object({
   firstName: z.string().min(1),
   lastName: z.string(),

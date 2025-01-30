@@ -127,32 +127,36 @@ const updateUser = async (req: JWTRequest, res: Response): Promise<void> => {
     .where({ id: req.body.token.id })
     .first();
 
-  if (req.body.password) {
-    bcrypt.hash(req.body.password, SALT_ROUNDS, async (err, hashedPassword) => {
-      if (err) {
-        return res
-          .status(500)
-          .json({ message: "Couldn't encrypt the supplied password" });
-      }
-      try {
-        const payload = req.body;
-        console.log("payload", payload);
-        const userPayload: UserSchema = await knex("users")
-          .where({ id: user.id })
-          .update({
-            first_name: payload.firstName || user.firstName,
-            last_name: payload.lastName || user.lastName,
-            email: payload.email || user.email,
-            password: hashedPassword || user.password,
-            active: true,
-          });
+  if (req.body.newPassword) {
+    bcrypt.hash(
+      req.body.newPassword,
+      SALT_ROUNDS,
+      async (err, hashedPassword) => {
+        if (err) {
+          return res
+            .status(500)
+            .json({ message: "Couldn't encrypt the supplied password" });
+        }
 
-        res.status(200).json(userPayload);
-      } catch (error) {
-        res.status(500).json({ message: "Couldn't update user " + error });
-        console.error(error);
+        try {
+          const payload = req.body;
+          const userPayload: UserSchema = await knex("users")
+            .where({ id: user.id })
+            .update({
+              first_name: payload.firstName || user.firstName,
+              last_name: payload.lastName || user.lastName,
+              email: payload.email || user.email,
+              password: hashedPassword || user.password,
+              active: true,
+            });
+
+          res.status(200).json(userPayload);
+        } catch (error) {
+          res.status(500).json({ message: "Couldn't update user " + error });
+          console.error(error);
+        }
       }
-    });
+    );
   }
 };
 
