@@ -127,7 +127,7 @@ const updateUser = async (req: JWTRequest, res: Response): Promise<void> => {
     .where({ id: req.body.token.id })
     .first();
 
-  if (req.body.newPassword) {
+  if (req.body) {
     bcrypt.hash(
       req.body.newPassword,
       SALT_ROUNDS,
@@ -140,6 +140,7 @@ const updateUser = async (req: JWTRequest, res: Response): Promise<void> => {
 
         try {
           const payload = req.body;
+
           const userPayload: UserSchema = await knex("users")
             .where({ id: user.id })
             .update({
