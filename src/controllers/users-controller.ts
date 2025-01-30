@@ -140,16 +140,16 @@ const updateUser = async (req: JWTRequest, res: Response): Promise<void> => {
         const userPayload: UserSchema = await knex("users")
           .where({ id: user.id })
           .update({
-            first_name: payload.firstName,
-            last_name: payload.lastName,
-            email: payload.email,
-            password: hashedPassword,
+            first_name: payload.firstName || user.firstName,
+            last_name: payload.lastName || user.lastName,
+            email: payload.email || user.email,
+            password: hashedPassword || user.password,
             active: true,
           });
 
         res.status(200).json(userPayload);
       } catch (error) {
-        res.status(500).json({ message: "Couldn't create user" + error });
+        res.status(500).json({ message: "Couldn't create user " + error });
         console.error(error);
       }
     });
