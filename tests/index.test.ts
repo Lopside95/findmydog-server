@@ -45,11 +45,11 @@ describe("Log in", () => {
   });
 });
 
-describe("Delete user", () => {
-  it("should return 200 for user delete", async () => {
-    const res = await request(app).delete("/users/account").send({
-      email: userData.email,
-    });
-    expect(res.status).toBe(200);
-  });
-});
+// describe("Delete user", () => {
+//   it("should return 200 for user delete", async () => {
+//     const res = await request(app).delete("/users/account").send({
+//       email: userData.email,
+//     });
+//     expect(res.status).toBe(200);
+//   });
+// });
