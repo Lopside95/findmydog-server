@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import initKnex from "knex";
 import knexConfig from "../../knexfile";
 import { PostSchema, TagSchema } from "../utils/schemas";
-import { Post } from "../utils/types";
+import { Post, PostWithUserDetails } from "../utils/types";
 import { getPosts, getSinglePostById } from "../utils/helpers";
 import { JWTRequest } from "../middleware/auth";
 
@@ -19,7 +19,7 @@ const getOnlyPosts = async (req: Request, res: Response): Promise<void> => {
 
 const getAllPosts = async (req: Request, res: Response): Promise<void> => {
   try {
-    const posts: Post[] = await getPosts();
+    const posts: PostWithUserDetails[] = await getPosts();
 
     res.status(200).json(posts);
   } catch (error) {
@@ -52,7 +52,7 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
       img: data.img,
       description: data.description,
       urgency: data.urgency,
-      type: data.PostType,
+      // type: data.PostType,
       status: data.PostStatus,
       user_id: req.body.token.id,
     });

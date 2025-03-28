@@ -10,8 +10,8 @@ export async function up(knex: Knex) {
     table.string("longitude");
     table.string("latitude");
     table.integer("urgency").notNullable();
-    table.enu("type", ["LOST", "FOUND", "SIGHTING"]).notNullable();
-    table.enu("status", ["OPEN", "CLOSED"]).notNullable();
+    // table.enu("type", ["LOST", "FOUND", "SIGHTING"]).notNullable();
+    table.enu("status", ["MISSING", "FOUND", "SEEN"]).notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table
       .timestamp("updated_at")

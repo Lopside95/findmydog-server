@@ -13,7 +13,7 @@ export type Post = {
   img?: string;
   description: string;
   urgency: number;
-  type: PostType;
+  // type: PostType;
   status: PostStatus;
   tags: Tag[];
   longitude?: number;
@@ -35,6 +35,17 @@ export type User = {
   updated_at: Date;
 };
 
+export interface PostWithUserDetails extends Post {
+  first_name: string;
+  last_name: string;
+}
+// export interface PostWithUserDetails extends Post {
+//   user: {
+//     firstName: string;
+//     lastName: string;
+//   };
+// }
+
 export type UserComment = {
   id: string;
   content: string;
@@ -44,13 +55,14 @@ export type UserComment = {
   updated_at: Date;
 };
 
-export enum PostType {
-  "LOST",
-  "FOUND",
-  "SIGHTING",
-}
+// export enum PostType {
+//   "LOST",
+//   "FOUND",
+//   "SIGHTING",
+// }
 
 export enum PostStatus {
-  "OPEN",
-  "CLOSED",
+  "MISSING",
+  "FOUND",
+  "SEEN",
 }

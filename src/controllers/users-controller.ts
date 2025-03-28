@@ -65,7 +65,7 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
   });
 };
 
-const login = async (req: JWTRequest, res: Response) => {
+const signin = async (req: JWTRequest, res: Response) => {
   try {
     const user: User = await knex("users")
       .where({ email: req.body.email })
@@ -127,12 +127,14 @@ const updateUser = async (req: JWTRequest, res: Response): Promise<void> => {
     .where({ id: req.body.token.id })
     .first();
 
+  console.log("req.body", req.body);
+
   if (req.body) {
     bcrypt.hash(
       req.body.newPassword,
       SALT_ROUNDS,
       async (err, hashedPassword) => {
-        if (err) {
+        if (err && req.body.newPassword) {
           return res
             .status(500)
             .json({ message: "Couldn't encrypt the supplied password" });
@@ -186,7 +188,7 @@ export {
   getAllUsers,
   createUser,
   getUserById,
-  login,
+  signin,
   getAuthedUser,
   updateUser,
   deleteUser,

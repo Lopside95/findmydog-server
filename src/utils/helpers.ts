@@ -52,8 +52,12 @@ const getSinglePostById = async (id: string) => {
 
 const getPosts = async () => {
   return await knex("posts")
+    .join("users", "users.id", "posts.user_id")
     .select(
       "posts.*",
+      "users.first_name",
+      "users.last_name",
+      "users.email",
       knex("tags")
         .select(
           knex.raw(
@@ -72,7 +76,7 @@ const getPosts = async () => {
         .whereRaw("comments.post_id = posts.id")
         .as("comments")
     )
-    .groupBy("posts.id");
+    .groupBy("posts.id", "users.first_name", "users.last_name");
 };
 
 const hashPassword = async (password: string) => {

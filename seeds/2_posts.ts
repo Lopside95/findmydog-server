@@ -12,8 +12,8 @@ export async function seed(knex: Knex) {
       longitude: "-0.16216766793388615",
       latitude: "51.565463153667594",
       urgency: 3,
-      type: "SIGHTING",
-      status: "OPEN",
+      // type: "SIGHTING",
+      status: "FOUND",
       user_id: 1,
     },
   ]);
