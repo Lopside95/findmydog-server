@@ -1,5 +1,5 @@
 export type Tag = {
-  id: string;
+  id: number;
   name: string;
 };
 
@@ -62,7 +62,7 @@ export type UserComment = {
 // }
 
 export enum PostStatus {
-  "MISSING",
   "FOUND",
+  "MISSING",
   "SEEN",
 }

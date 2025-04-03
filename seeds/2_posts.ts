@@ -5,10 +5,10 @@ export async function seed(knex: Knex) {
 
   await knex("posts").insert([
     {
-      title: "Greyhound seen near Hampstead Heath",
-      img: "https://storage.googleapis.com/find-my-dog/greyhound.jpg",
+      title: "Beagle seen near Hampstead Heath",
+      img: "https://firebasestorage.googleapis.com/v0/b/capstone-5adbe.firebasestorage.app/o/findmydog%2FBeagle%20in%20Hampstead%20Heath%2Fbeagle.jpg?alt=media&token=f269a271-fb3d-4c35-894e-732e6ad848c5",
       description:
-        "Greyhound with white spots found in London Fields by the table tennis courts. Name on collar: Felix. He’s friendly!",
+        "Beagle with white spots found in London Fields by the table tennis courts. Name on collar: Felix. He’s friendly!",
       longitude: "-0.16216766793388615",
       latitude: "51.565463153667594",
       urgency: 3,

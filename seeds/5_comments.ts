@@ -9,5 +9,20 @@ export async function seed(knex: Knex) {
       user_id: 1,
       post_id: 1,
     },
+    {
+      content: "This is comment 2",
+      user_id: 1,
+      post_id: 1,
+    },
+    {
+      content: "This is comment 3",
+      user_id: 1,
+      post_id: 1,
+    },
+    {
+      content: "This is comment 4",
+      user_id: 1,
+      post_id: 1,
+    },
   ]);
 }

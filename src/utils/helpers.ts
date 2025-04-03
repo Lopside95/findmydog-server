@@ -1,9 +1,11 @@
 import initKnex from "knex";
 import knexConfig from "../../knexfile";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const knex = initKnex(knexConfig);
 
 import bcrypt from "bcrypt";
+import { storage } from "../firebase";
 
 const SALT_ROUNDS = 10;
 
@@ -101,6 +103,16 @@ const checkPassword = async (reqPassword: string, userPassword: string) => {
     return true;
   }
 };
+
+// export const uploadPhoto = async (
+//   file: File,
+//   path: string
+// ): Promise<string> => {
+//   const storageRef = ref(storage, path);
+//   await uploadBytes(storageRef, file);
+//   const url = await getDownloadURL(storageRef);
+//   return url;
+// };
 
 export {
   getPostsAndTags,
