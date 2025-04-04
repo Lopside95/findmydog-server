@@ -13,6 +13,9 @@
     "rollback": "knex migrate:rollback",
     "tables": "pnpm run rollback && pnpm run migrate && pnpm run seed"
   },
+  "engines": {
+    "node": ">=18.x"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -21,7 +21,7 @@ app.use("/posts", posts);
 app.use("/users", users);
 app.use("/tags", tags);
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 export { app };
 
 app.listen(port, () => {
