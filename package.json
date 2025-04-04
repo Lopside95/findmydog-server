@@ -14,7 +14,7 @@
     "tables": "pnpm run rollback && pnpm run migrate && pnpm run seed"
   },
   "engines": {
-    "node": ">=18.x"
+    "node": "18.x"
   },
   "keywords": [],
   "author": "",

@@ -10,11 +10,10 @@ const router: Router = Router();
 
 const app: Express = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use(express.static("public"));
-
-app.use(cors());
 
 app.use("/", home);
 app.use("/posts", posts);

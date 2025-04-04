@@ -1,6 +1,5 @@
 import initKnex from "knex";
 import knexConfig from "../../knexfile";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const knex = initKnex(knexConfig);
 
