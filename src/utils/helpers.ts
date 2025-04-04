@@ -5,7 +5,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const knex = initKnex(knexConfig);
 
 import bcrypt from "bcrypt";
-import { storage } from "../firebase";
+// import { storage } from "../firebase";
 
 const SALT_ROUNDS = 10;
 
