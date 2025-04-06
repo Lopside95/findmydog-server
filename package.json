@@ -11,7 +11,8 @@
     "migrate": "knex migrate:latest",
     "seed": "knex seed:run",
     "rollback": "knex migrate:rollback",
-    "tables": "pnpm run rollback && pnpm run migrate && pnpm run seed"
+    "tables": "pnpm run rollback && pnpm run migrate && pnpm run seed",
+    "heroku-postbuild": "pnpm run build"
   },
   "engines": {
     "node": ">=16"
