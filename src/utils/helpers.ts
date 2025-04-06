@@ -3,7 +3,7 @@ import knexConfig from "../../knexfile";
 
 const knex = initKnex(knexConfig);
 
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 // import { storage } from "../firebase";
 
 const SALT_ROUNDS = 10;
