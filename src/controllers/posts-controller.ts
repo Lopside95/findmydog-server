@@ -4,7 +4,6 @@ import knexConfig from "../../knexfile";
 import { PostSchema, TagSchema } from "../utils/schemas";
 import { Post, PostWithUserDetails } from "../utils/types";
 import { getPosts, getSinglePostById } from "../utils/helpers";
-import { JWTRequest } from "../middleware/auth";
 
 const knex = initKnex(knexConfig);
 
