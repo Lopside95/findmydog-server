@@ -2,7 +2,7 @@
 
 Find My Dog is a web-app that allows people to report missing dogs and list sightings of lost or stray dogs.
 
-TypeScript | MySQL | Knex
+TypeScript | MySQL | Knex | Express.js
 
 <p>
   <img
