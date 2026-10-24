@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node:*)",
+      "Bash(pnpm run migrate)",
+      "Bash(pnpm build)",
+      "Bash(pnpm list --depth=0)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
